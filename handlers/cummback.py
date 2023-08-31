@@ -10,8 +10,12 @@ async def gay_list(call: types.CallbackQuery):
     print(str(users))
     doto = []
     for i in users:
-        doto.append(str(i))
-    doto = ''.join(doto)
+        if not i["username"]:
+            doto.append("None Username")
+        else:
+            doto.append(i("username"))
+
+    doto = '\n'.join(doto)
     await call.message.reply(f"{doto}")
 
 

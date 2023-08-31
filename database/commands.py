@@ -12,6 +12,7 @@ class Database:
             print("База данных успешно подключена")
 
         self.connection.execute(queris.create_user_table_query)
+        self.connection.execute(queris.create_fsm_user_table_query)
         self.connection.commit()
 
     def sql_insert_start(self,
@@ -25,4 +26,28 @@ class Database:
         self.connection.commit()
 
     def sql_user(self):
+        self.cursor.row_factory = lambda cursor, row: {'username': row[0]}
         return self.cursor.execute(queris.select_user_query).fetchall()
+
+
+    def select_user_id_query(self, telegram_id):
+        self.cursor.row_factory = lambda cursor, row: {'username': row[0]}
+        return self.cursor.execute(queris.select_user_id_query, (telegram_id)).fetchall()
+    def sql_insert_start_fsm(self,
+                             user_id,
+                             telegram_id,
+                             nickname,
+                             age,
+                             bio,
+                             gender,
+                             photo
+                             ):
+        self.cursor.execute(queris.insert_user_query, (None,
+                                                       user_id,
+                                                       telegram_id,
+                                                       nickname,
+                                                       age,
+                                                       bio,
+                                                       gender,
+                                                       photo))
+        self.connection.commit()
