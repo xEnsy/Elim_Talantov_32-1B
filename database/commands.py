@@ -29,10 +29,10 @@ class Database:
         self.cursor.row_factory = lambda cursor, row: {'username': row[0]}
         return self.cursor.execute(queris.select_user_query).fetchall()
 
-
     def select_user_id_query(self, telegram_id):
         self.cursor.row_factory = lambda cursor, row: {'username': row[0]}
-        return self.cursor.execute(queris.select_user_id_query, (telegram_id)).fetchall()
+        return self.cursor.execute(queris.select_user_id_query, telegram_id).fetchall()
+
     def sql_insert_start_fsm(self,
                              user_id,
                              telegram_id,
