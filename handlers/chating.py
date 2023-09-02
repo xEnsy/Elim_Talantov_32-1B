@@ -16,14 +16,15 @@ async def secter_bruh(message: types.Message):
 
 
 async def bruh(message: types.Message):
-    ban_word = ["gay", "nefor", "offnic", "negor",]
+    ban_word = ["gay", "nefor", "offnic", "negor", ]
     print(message.chat.id)
     if message.chat.id == -1001740577981:
         for word in ban_word:
             if word in message.text.lower().replace(" ", ''):
                 await bot.send_message(message.chat.id,
                                        "ban polu4ich!")
-                await bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
+                await bot.delete_message(chat_id=message.chat.id,
+                                         message_id=message.message_id)
 
 
 def register_handlers_chating(dp: Dispatcher):
