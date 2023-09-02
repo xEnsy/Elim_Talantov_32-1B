@@ -5,7 +5,6 @@ create_user_table_query = """
         USERNAME CHAR(50),        
         FIRST_NAME CHAR(50),        
         LAST_NAME CHAR(50),
-        REFERENCE_LINK TEXT NULL,
         UNIQUE (TELEGRAM_ID)
         )
 """
@@ -21,9 +20,9 @@ create_fsm_user_table_query = """
         )
 """
 
-insert_user_query = """INSERT INTO telegram_users VALUES(?, ?, ?, ?)"""
+insert_user_query = """INSERT INTO telegram_users VALUES(?, ?, ?, ?, ?)"""
 
-insert_user_form_query = """INSERT INTO user_form VALUES(?, ?, ?, ?, ?, ?, ?, ?)"""
+insert_user_form_query = """INSERT INTO user_form VALUES(?, ?, ?, ?, ?, ?)"""
 
 select_user_query = """SELECT username FROM telegram_users """
 
