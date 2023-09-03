@@ -60,15 +60,14 @@ async def load_photo(message: types.Message, state: FSMContext):
     path = await message.photo[-1].download(destination_dir="C:/Users/Энси/PycharmProjects/bruh/handlers/media")
     async with state.proxy() as data:
         data['photo'] = path.name
-        Database().sql_insert_start_fsm(user_id=user_id['id'],
+        Database().sql_insert_start_fsm(user_id=user_id,
                                         telegram_id=message.from_user.id,
                                         nickname=data['nickname'],
                                         age=data['age'],
-                                        bio=data['bio'],
-                                        gender=data['gender'],
-                                        photo=data['photo']
+                                        bio=['bio'],
+                                        gender=['gender'],
+                                        photo=['photo'],
                                         )
-    with open(path.name, 'rb') as photo:
         await message.reply('Готова')
         await state.finish()
 

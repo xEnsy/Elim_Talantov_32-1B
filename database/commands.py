@@ -16,10 +16,12 @@ class Database:
         self.connection.commit()
 
     def sql_insert_start(self,
+                         telegram_id,
                          username,
                          first_name,
                          last_name):
         self.cursor.execute(queris.insert_user_query, (None,
+                                                       telegram_id,
                                                        username,
                                                        first_name,
                                                        last_name))
@@ -30,8 +32,8 @@ class Database:
         return self.cursor.execute(queris.select_user_query).fetchall()
 
     def select_user_id_query(self, telegram_id):
-        self.cursor.row_factory = lambda cursor, row: {'username': row[0]}
-        return self.cursor.execute(queris.select_user_id_query, telegram_id).fetchall()
+        self.cursor.row_factory = lambda cursor, row: {'id': row[0]}
+        return self.cursor.execute(queris.select_user_id_query, (telegram_id,)).fetchall()
 
     def sql_insert_start_fsm(self,
                              user_id,
@@ -42,12 +44,12 @@ class Database:
                              gender,
                              photo
                              ):
-        self.cursor.execute(queris.insert_user_query, (None,
-                                                       user_id,
-                                                       telegram_id,
-                                                       nickname,
-                                                       age,
-                                                       bio,
-                                                       gender,
-                                                       photo))
+        self.cursor.execute(queris.insert_user_form_query, (None,
+                                                            user_id,
+                                                            telegram_id,
+                                                            nickname,
+                                                            age,
+                                                            bio,
+                                                            gender,
+                                                            photo))
         self.connection.commit()

@@ -5,19 +5,18 @@ create_user_table_query = """
         USERNAME CHAR(50),        
         FIRST_NAME CHAR(50),        
         LAST_NAME CHAR(50),
-        UNIQUE (TELEGRAM_ID)
-        )
+        UNIQUE (TELEGRAM_ID))
 """
 create_fsm_user_table_query = """
         CREATE TABLE IF NOT EXISTS user_form
         (ID INTEGER PRIMARY KEY,
+        USER_ID INTEGER NOT NULL,
         TELEGRAM_ID INTEGER,
         NICKNAME CHAR(50),
         AGE INTEGER,
         BIO TEXT,
         PHOTO TEXT,
-        UNIQUE (TELEGRAM_ID)
-        )
+        FOREIGN KEY (USER_ID) REFERENCES telegram_users (ID))
 """
 
 insert_user_query = """INSERT INTO telegram_users VALUES(?, ?, ?, ?, ?)"""
